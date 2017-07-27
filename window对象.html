@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var i=1;
+    invoke(function () {
+        console.log(i++);
+    }, 0, 1000, 5000);
+    /**
+     * 定时器函数
+     */
+    function invoke(f,start,interval,end) {
+        if(!start) {
+            start=0; //默认设置为0毫秒
+        }
+        if(arguments.length<=2) { //单次调用模式
+            setTimeout(f, start);
+        }else {
+            var interval = setInterval(f, interval);
+            if(end) {
+                setTimeout(function () {
+                    clearInterval(interval);
+                }, end); //end毫秒后停止调用
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
