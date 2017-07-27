@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /**
+     * 返回e的第n层祖先元素,不存在或不是element返回null
+     */
+    function parent(e,n) {
+        if(n === undefined) {
+            n=1;
+        }
+        while(n-- && e) {
+            e=e.parentNode;
+        }
+        if(!e||e.nodeType !== 1){
+            return null;
+        }
+        return e;
+    }
+</script>
+
+<script>
+    /**
+     * 返回元素e的第n个兄弟
+     */
+    function sibling(e,n) {
+        while(e && n!== 0) {
+            if(n>0) { //查找后面的兄弟
+                if(e.nextElementSibling) {
+                    e=e.nextElementSibling;
+                }else {
+                    for(e=e.nextSibling;e && e.nodeType !==1;e=e.nextSibling) {
+                        //空循环
+                    }
+                }
+                n--;
+            }else { //查找前面的兄弟
+                if(e.previousElementSibling) {
+                    e=e.previousElementSibling;
+                }else {
+                    for(e=e.previousSibling; e && e.nodeType !==1;e=e.previousSibling) {
+                        //空循环
+                    }
+                }
+                n++;
+            }
+        }
+        return e;
+    }
+</script>
+
+</body>
+</html>
