@@ -31,5 +31,32 @@
     }
 </script>
 
+<script>
+    /**
+     * 提取URL搜索字符串的参数
+     */
+    function urlArgs(){
+        var args = {};
+        var query = location.search.substring(1); //location.search返回地址?后的url
+        var pairs = query.split("&");//将查询字符串分开
+        for(var i=0;i<pairs.length;i++) {
+            var pos = pairs[i].indexOf("="); //查找name=value
+            if(pos==-1) { //不是这种格式,跳过
+                continue;
+            }
+            var name = pairs[i].substring(0, pos);
+            var value = pairs[i].substring(pos + 1);
+            value = decodeURIComponent(value); //对value进行解码
+            args[name]=value; //存储为属性
+        }
+        return args;
+    }
+
+    var args=urlArgs();
+    for(var name in args) {
+        alert(name + " = " + args[name]);
+    }
+</script>
+
 </body>
 </html>
